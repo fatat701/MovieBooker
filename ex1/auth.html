@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1</title>
+</head>
+<body>
+  <h2>Authentication</h2>
+
+  <input type="text" id="username" placeholder="Username"><br><br>
+  <input type="password" id="password" placeholder="Password"><br><br>
+
+  <button onclick="register()">Register</button>
+  <button onclick="login()">Login</button>
+
+  <p id="tokenDisplay"></p>
+  <p id="loginStatus"></p>
+
+  <script>
+    let savedToken = null; 
+
+    function generateToken(user) {
+      return btoa(JSON.stringify(user));
+    }
+
+    function verifyToken(token) {
+      try {
+        return JSON.parse(atob(token));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function register() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      const user = { username, password };
+      savedToken = generateToken(user); 
+
+      document.getElementById('tokenDisplay').textContent = "Token saved: " + savedToken;
+      document.getElementById('loginStatus').textContent = "Registration successful.";
+    }
+
+    // Login function
+    function login() {
+      const inputUsername = document.getElementById('username').value;
+      const inputPassword = document.getElementById('password').value;
+
+      if (!savedToken) {
+        document.getElementById('loginStatus').textContent = "No user registered.";
+        return;
+      }
+
+      const decodedUser = verifyToken(savedToken);
+
+      if (
+        decodedUser.username === inputUsername &&
+        decodedUser.password === inputPassword
+      ) {
+        document.getElementById('loginStatus').textContent = "Login successful,  " + decodedUser.username ;
+      } else {
+        document.getElementById('loginStatus').textContent = "Invalid credentials.";
+      }
+    }
+  </script>
+</body>
+</html>
+
