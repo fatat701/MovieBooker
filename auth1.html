@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 1 - Part 2</title>
+</head>
+<body>
+  <h2>Add a User</h2>
+  <input type="text" id="newName" placeholder="Name">
+  <input type="email" id="newEmail" placeholder="Email">
+  <button onclick="addUser()">Add User</button>
+
+  <h2>Filter Users by Name</h2>
+  <input type="text" id="searchName" placeholder="Search name">
+  <button onclick="filterUsers()">Filter</button>
+
+  <h3>Results:</h3>
+  <ul id="resultList"></ul>
+
+  <script>
+    const users = [];
+
+    function isValidEmail(email) {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
+    }
+
+    function addUser() {
+      const name = document.getElementById("newName").value.trim();
+      const email = document.getElementById("newEmail").value.trim();
+
+      if (!name || !email) {
+        alert("Please enter both name and email.");
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      users.push({ name, email });
+
+      document.getElementById("newName").value = "";
+      document.getElementById("newEmail").value = "";
+
+      displayResults(users);
+    }
+
+    function filterUsers() {
+      const search = document.getElementById("searchName").value.toLowerCase();
+      const filtered = users.filter(user =>
+        user.name.toLowerCase().includes(search)
+      );
+      displayResults(filtered);
+    }
+
+    function displayResults(list) {
+      const resultList = document.getElementById("resultList");
+      resultList.innerHTML = "";
+
+      if (list.length === 0) {
+        resultList.innerHTML = "<li>No users found.</li>";
+        return;
+      }
+
+      list.forEach(user => {
+        const li = document.createElement("li");
+        li.textContent = `${user.name} - ${user.email}`;
+        resultList.appendChild(li);
+      });
+    }
+  </script>
+</body>
+</html>
