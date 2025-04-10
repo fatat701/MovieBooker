@@ -33,15 +33,18 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-   
       <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
-
- 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/movies/:id" element={<MovieDetail />} />
 
-      
+      <Route
+        path="/movies/:id"
+        element={
+          <ProtectedRoute>
+            <MovieDetail />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="/movies/:id/reserve"
         element={

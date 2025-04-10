@@ -67,16 +67,17 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       console.log("Réponse du serveur:", response.status, response.statusText)
 
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        throw new Error(errorData.message || `Erreur lors de la connexion (${response.status})`)
+      }
+
       const data = await response.json()
       console.log("Données reçues:", data)
 
-      if (!response.ok) {
-        throw new Error(data.message || "Erreur lors de la connexion")
-      }
-
       const userData = {
         id: data.id || data.userId || "1",
-        name: data.name || data.username || "Utilisateur",
+        name: data.name || data.username || email.split("@")[0],
         email: email,
         access_token: data.access_token || data.token,
       }

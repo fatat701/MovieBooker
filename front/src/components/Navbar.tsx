@@ -7,6 +7,7 @@ import { useAuth } from "@/contexts/AuthContext"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Film, Search, User, LogIn, LogOut } from "lucide-react"
+import { toast } from "sonner"
 
 interface NavbarProps {
   onSearch: (query: string) => void
@@ -19,6 +20,11 @@ const Navbar: React.FC<NavbarProps> = ({ onSearch }) => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
+    if (searchQuery.trim() === "") {
+      toast.error("Veuillez entrer un terme de recherche")
+      return
+    }
+    console.log("Recherche lancée pour:", searchQuery)
     onSearch(searchQuery)
   }
 
