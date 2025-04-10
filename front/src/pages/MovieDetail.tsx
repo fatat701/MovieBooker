@@ -24,7 +24,6 @@ const MovieDetail: React.FC = () => {
         setError(null)
         console.log("Fetching movie with ID:", id)
 
-        // First try to get the specific movie
         const data = await getMovie(id)
 
         if (data) {
@@ -78,7 +77,6 @@ const MovieDetail: React.FC = () => {
     )
   }
 
-  // Ensure genres is an array
   const genres = Array.isArray(movie.genres) ? movie.genres : []
 
   return (

@@ -246,29 +246,22 @@ const MovieList: React.FC<MovieListProps> = ({ searchQuery }) => {
             </Button>
 
             {Array.from({ length: Math.min(15, totalPages) }, (_, i) => {
-              // Logique pour afficher les pages
               let pageToShow
 
               if (totalPages <= 15) {
-                // Si moins de 15 pages, afficher toutes les pages
                 pageToShow = i + 1
               } else if (currentPage <= 7) {
-                // Si on est au début, afficher les 15 premières pages
                 pageToShow = i + 1
               } else if (currentPage >= totalPages - 7) {
-                // Si on est à la fin, afficher les 15 dernières pages
                 pageToShow = totalPages - 14 + i
               } else {
-                // Sinon, afficher 7 pages avant et 7 pages après la page courante
                 pageToShow = currentPage - 7 + i
               }
 
-              // Ne pas afficher la page si elle est hors limites
               if (pageToShow <= 0 || pageToShow > totalPages) {
                 return null
               }
 
-              // Afficher des points de suspension pour indiquer qu'il y a plus de pages
               if (
                 (pageToShow === 2 && currentPage > 7 && totalPages > 15) ||
                 (pageToShow === totalPages - 1 && currentPage < totalPages - 7 && totalPages > 15)
@@ -280,7 +273,6 @@ const MovieList: React.FC<MovieListProps> = ({ searchQuery }) => {
                 )
               }
 
-              // Afficher le bouton de page
               return (
                 <Button
                   key={pageToShow}

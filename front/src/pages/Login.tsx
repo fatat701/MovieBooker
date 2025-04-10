@@ -20,7 +20,6 @@ const Login: React.FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  // Rediriger vers la page d'accueil si l'utilisateur est déjà connecté
   useEffect(() => {
     if (user) {
       const from = location.state?.from || "/"

@@ -23,11 +23,9 @@ const Home: React.FC = () => {
   const [searchParams] = useSearchParams()
 
   useEffect(() => {
-    // Get search query from URL
     const query = searchParams.get("search") || ""
     setSearchQuery(query)
 
-    // Get page and sort from URL if available
     const pageParam = searchParams.get("page")
     const sortParam = searchParams.get("sort") as "asc" | "desc" | null
 
@@ -52,7 +50,6 @@ const Home: React.FC = () => {
       if (query) {
         data = await searchMovies(query, page)
       } else {
-        // Essayer de récupérer les films avec pagination
         const TMDB_API_KEY = "3e52e2f5350e06e5cb20053948f5196d"
         const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${TMDB_API_KEY}&language=fr-FR&page=${page}`
 
@@ -81,7 +78,6 @@ const Home: React.FC = () => {
 
       setMovies(data)
 
-      // Set pagination info
       setTotalPages(totalPagesCount || Math.ceil(data.length / 10) || 1)
       setTotalResults(totalResultsCount || data.length)
     } catch (error) {
@@ -101,23 +97,19 @@ const Home: React.FC = () => {
 
     setCurrentPage(newPage)
 
-    // Update URL with new page
     const params = new URLSearchParams(searchParams)
     params.set("page", newPage.toString())
 
-    // Keep sort parameter if it exists
     if (sortOrder) {
       params.set("sort", sortOrder)
     }
 
-    // Keep search parameter if it exists
     if (searchQuery) {
       params.set("search", searchQuery)
     }
 
     navigate(`?${params.toString()}`)
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
@@ -130,7 +122,6 @@ const Home: React.FC = () => {
 
     setSortOrder(sort)
 
-    // Update URL with new sort order
     const params = new URLSearchParams(searchParams)
 
     if (sort) {
@@ -139,23 +130,19 @@ const Home: React.FC = () => {
       params.delete("sort")
     }
 
-    // Keep page parameter
     if (currentPage > 1) {
       params.set("page", currentPage.toString())
     }
 
-    // Keep search parameter if it exists
     if (searchQuery) {
       params.set("search", searchQuery)
     }
 
     navigate(`?${params.toString()}`)
 
-    // Fetch movies with new sort order
     fetchMovies(searchQuery, currentPage, sort)
   }
 
-  // Appliquer le tri côté client si nécessaire
   const sortedMovies = [...movies]
   if (sortOrder === "asc") {
     sortedMovies.sort((a, b) => a.title.localeCompare(b.title))

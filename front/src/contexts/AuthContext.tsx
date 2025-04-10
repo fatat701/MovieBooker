@@ -126,7 +126,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         throw new Error(data.message || "Erreur lors de l'inscription")
       }
 
-      // Si l'API renvoie directement un token après inscription
       if (data.access_token || data.token) {
         const userData = {
           id: data.id || data.userId || "1",
@@ -142,7 +141,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         toast.success("Inscription réussie !")
         return true
       } else {
-        // Sinon, faire un login automatique
         console.log("Pas de token dans la réponse, tentative de connexion automatique...")
         return await login(email, password)
       }
@@ -160,7 +158,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null)
     localStorage.removeItem("mMovieBookerUser")
     toast.success("Déconnexion réussie")
-    // Rediriger vers la page d'accueil après déconnexion
     window.location.href = "/"
   }
 

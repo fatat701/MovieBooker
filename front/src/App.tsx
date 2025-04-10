@@ -18,7 +18,6 @@ import NotFound from "./pages/NotFound"
 
 const queryClient = new QueryClient()
 
-// Composant de protection des routes qui vérifie si l'utilisateur est connecté
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth()
 
@@ -34,15 +33,15 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {/* Rediriger vers la page de connexion si l'utilisateur n'est pas connecté */}
+   
       <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
 
-      {/* Pages accessibles à tous */}
+ 
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/movies/:id" element={<MovieDetail />} />
 
-      {/* Pages protégées qui nécessitent une connexion */}
+      
       <Route
         path="/movies/:id/reserve"
         element={
@@ -60,7 +59,6 @@ const AppRoutes = () => {
         }
       />
 
-      {/* Page 404 */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
