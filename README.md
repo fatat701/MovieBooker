@@ -7,44 +7,33 @@ Avant de démarrer le projet, assurez-vous d'avoir les outils suivants installé
 
 Pour installer le projet, commencez par cloner le repository avec la commande suivante :
 
-```
-git clone https://github.com/fatat701/MovieBooker.git
-```
+
+git clone https://github.com/fatat701/MovieBooker.git ->branche main
+
 
 Allez ensuite dans le répertoire du backend et installez les dépendances :
 
-```
+
 cd backend
 npm install
-```
-
-Configurez les variables d'environnement et lancez le serveur backend en mode développement local avec la commande :
-
-```
 npm run start:dev
-```
+
 
 Si vous préférez utiliser la version déployée, vous pouvez accéder au backend via le lien suivant :  
-[Backend en ligne sur Render](https://moviebooker-4us1.onrender.com)
+[Backend en ligne sur Render] : https://moviebooker-4us1.onrender.com/api
 
 Pour le frontend, allez dans le répertoire du frontend, installez les dépendances et lancez le serveur frontend en mode développement :
 
-```
+
 cd front
 npm install
 npm run dev
-```
+
 
 Le backend exposera une API REST sécurisée avec JWT pour gérer l'authentification, la récupération des films via l'API TMDB, et la gestion des réservations. L'interface frontend, réalisée avec React, permettra aux utilisateurs de se connecter, visualiser les films, effectuer une réservation et consulter leurs réservations passées.
 
 Le projet peut être déployé localement ou dans un environnement cloud à l'aide de Docker ou d'autres outils de déploiement. Les étapes de déploiement peuvent varier en fonction de l'infrastructure choisie.
 
 La documentation complète des API est disponible via Swagger. Une fois le backend lancé, rendez-vous à l'URL suivante pour accéder à la documentation :  
-```
-http://localhost:3000/api
-```
 
-Si vous utilisez la version en ligne de l'API, accédez à :  
-```
-https://moviebooker-4us1.onrender.com/api
-<img width="647" alt="image" src="https://github.com/user-attachments/assets/623b42b9-79da-4945-a1cd-a7509933463c" />
+http://localhost:3000/api
