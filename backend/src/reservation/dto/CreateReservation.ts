@@ -10,7 +10,13 @@ export class CreateReservation {
   @IsNotEmpty()
   movieTitle: string;
 
-  @ApiProperty({ description: 'Format: YYYY-MM-DDTHH:mm:ssZ' })
-  @IsDateString()
+  @ApiProperty({
+    example: '2025-04-10 14:00',
+    description: 'Format attendu : YYYY-MM-DD HH:mm (heure locale)',
+  })
   startTime: string;
+  
+
+
+  
 }

@@ -16,15 +16,24 @@ export class MoviesService {
     this.apiKey = this.config.get('TMDB_API_KEY')!;
   }
 
-  async getNowPlaying(page = 1) {
+  async getNowPlaying(page = 1, sort?: 'asc' | 'desc') {
     const url = `${this.baseUrl}/movie/now_playing?api_key=${this.apiKey}&language=fr-FR&page=${page}`;
     try {
       const response = await firstValueFrom(this.http.get(url));
-      return response.data;
+      let movies = response.data.results;
+
+      if (sort === 'asc') {
+        movies = movies.sort((a, b) => a.title.localeCompare(b.title));
+      } else if (sort === 'desc') {
+        movies = movies.sort((a, b) => b.title.localeCompare(a.title));
+      }
+
+      return { ...response.data, results: movies };
     } catch (err) {
       throw new HttpException('Erreur TMDB: ' + err.message, 500);
     }
   }
+
 
   async searchMovies(query: string, page = 1) {
     const url = `${this.baseUrl}/search/movie?api_key=${this.apiKey}&language=fr-FR&query=${query}&page=${page}`;

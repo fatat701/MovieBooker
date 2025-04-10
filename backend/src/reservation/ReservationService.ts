@@ -17,7 +17,7 @@ export class ReservationService {
     console.log('user:', user);
   
     const start = new Date(createDto.startTime);
-    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000); // 2h plus tard
+    const end = new Date(start.getTime() + 2 * 60 * 60 * 1000); 
   
     const overlap = await this.reservationRepo
       .createQueryBuilder('r')
@@ -46,7 +46,7 @@ export class ReservationService {
     return this.reservationRepo.find({
       where: { user },
       order: { startTime: 'ASC' },
-      select: ['id', 'movieTitle', 'startTime'], // 👈 juste ce qui t'intéresse
+      select: ['id', 'movieTitle', 'startTime'], 
     });
   }
   

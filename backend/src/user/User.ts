@@ -6,7 +6,7 @@ export class User {
   id: number;
 
   @Column()
-  name: string; // 👈 nouveau champ
+  name: string; 
 
   @Column({ unique: true })
   email: string;
@@ -15,5 +15,5 @@ export class User {
   password: string;
 
   @Column({ default: 'user' })
-  role: 'user' | 'admin'; // 👈 type explicite pour éviter l'erreur
+  role: 'user' | 'admin'; 
 }

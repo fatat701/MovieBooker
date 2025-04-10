@@ -13,7 +13,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // 👇 ici, le bon nom est id, pas userId !
     return {
       id: payload.sub,
       email: payload.email,

@@ -4,7 +4,7 @@ import { Register } from './dto/Register';
 import { Login } from './dto/Login';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
-@ApiTags('Auth') // 👈 OBLIGATOIRE pour que Swagger les affiche
+@ApiTags('Auth') 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}

@@ -10,12 +10,10 @@ import { Reservation } from './reservation/Reservation';
 
 @Module({
   imports: [
-    // Charge .env dans toute l'app
     ConfigModule.forRoot({
       isGlobal: true,
     }),
 
-    // Connexion à PostgreSQL
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -27,11 +25,11 @@ import { Reservation } from './reservation/Reservation';
         password: config.get<string>('DB_PASSWORD')!,
         database: config.get<string>('DB_NAME')!,
         entities: [User, Reservation],
-        synchronize: true, // à désactiver en production
+        synchronize: true, 
       }),
     }),
 
-    // Modules métier
+   
     AuthModule,
     MoviesModule,
     ReservationModule,
